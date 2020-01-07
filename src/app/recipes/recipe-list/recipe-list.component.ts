@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Recipe } from "../recipe.model";
+import { RecipeService } from '../recipe.service';
 
 @Component({
   selector: "app-recipe-list",
@@ -7,25 +8,11 @@ import { Recipe } from "../recipe.model";
   styleUrls: ["./recipe-list.component.css"]
 })
 export class RecipeListComponent implements OnInit {
-  @Output() select: EventEmitter<Recipe> = new EventEmitter();
-  recipes: Recipe[] = [
-    new Recipe(
-      "A test recipe",
-      "this is simply a test",
-      "https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fit,w_1460,h_1825/k%2FPhoto%2FRecipes%2F2019-08-how-to-juiciest-turkey-meatballs%2FHow-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"
-    ),
-    new Recipe(
-      "Another test recipe",
-      "this is simply a test",
-      "https://cdn.apartmenttherapy.info/image/upload/f_auto,q_auto:eco,c_fit,w_1460,h_1825/k%2FPhoto%2FRecipes%2F2019-08-how-to-juiciest-turkey-meatballs%2FHow-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"
-    )
-  ];
+  recipes: Recipe[];
 
-  constructor() {}
+  constructor(private recipeService: RecipeService) {}
 
-  ngOnInit() {}
-
-  onSelected(recipe: Recipe) {
-    this.select.emit(recipe);
+  ngOnInit() {
+    this.recipes = this.recipeService.getRecipes();
   }
 }
