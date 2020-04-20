@@ -4,9 +4,4 @@ import { Component, Output, EventEmitter } from "@angular/core";
   selector: "app-header",
   templateUrl: "./header.component.html"
 })
-export class HeaderComponent {
-  @Output('featuredSelected') navigate: EventEmitter<string> = new EventEmitter();
-  onNavigate(location: string) {
-    this.navigate.emit(location);
-  }
-}
+export class HeaderComponent {}
